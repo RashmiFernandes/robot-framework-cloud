@@ -1,0 +1,217 @@
+name: Robot Framework Cloud Tests
+
+on:
+  # Manual trigger with environment selection
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Select Environment'
+        required: true
+        default: 'A'
+        type: choice
+        options:
+        - A
+        - B
+        - C
+      test_suite:
+        description: 'Test Suite to Run'
+        required: true
+        default: 'Sanity'
+        type: choice
+        options:
+        - Sanity
+        - All
+      browser:
+        description: 'Browser Type'
+        required: true
+        default: 'chrome'
+        type: choice
+        options:
+        - chrome
+        - firefox
+        - edge
+      parallel:
+        description: 'Run tests in parallel'
+        required: false
+        default: false
+        type: boolean
+
+  # Schedule to run daily at 6 AM UTC
+  schedule:
+    - cron: '0 6 * * *'
+
+  # Trigger on push to main branch
+  push:
+    branches: [ main ]
+    paths:
+      - 'Testcases/**'
+      - 'Keywords/**'
+      - 'PageObjects/**'
+      - 'Resource/**'
+
+jobs:
+  robot-tests:
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        environment: ${{ github.event_name == 'workflow_dispatch' && fromJson(format('["{0}"]', github.event.inputs.environment)) || fromJson('["A"]') }}
+    
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+    
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+    
+    - name: Build Docker Image
+      run: |
+        docker build -t robot-tests:latest .
+    
+    - name: Create Results Directory
+      run: |
+        mkdir -p ${{ github.workspace }}/results
+        chmod 777 ${{ github.workspace }}/results
+    
+    - name: Run Robot Framework Tests
+      run: |
+        ENVIRONMENT="${{ matrix.environment }}"
+        TEST_SUITE="${{ github.event.inputs.test_suite || 'Sanity' }}"
+        BROWSER="${{ github.event.inputs.browser || 'chrome' }}"
+        PARALLEL="${{ github.event.inputs.parallel || 'false' }}"
+        
+        echo "Running tests for Environment: $ENVIRONMENT"
+        echo "Test Suite: $TEST_SUITE"
+        echo "Browser: $BROWSER"
+        echo "Parallel: $PARALLEL"
+        
+        # Determine test path
+        if [ "$TEST_SUITE" = "All" ]; then
+          TEST_PATH="Testcases/"
+        else
+          TEST_PATH="Testcases/${TEST_SUITE}/"
+        fi
+        
+        # Build docker command
+        DOCKER_CMD="docker run --rm \
+          -v ${{ github.workspace }}/results:/app/results \
+          -e TEST_ENV=$ENVIRONMENT \
+          -e HEADLESS=true \
+          -e BROWSER=$BROWSER \
+          robot-tests:latest"
+        
+        # Add parallel execution if requested
+        if [ "$PARALLEL" = "true" ]; then
+          $DOCKER_CMD pabot --outputdir /app/results \
+            --variable TEST_ENV:$ENVIRONMENT \
+            --variable BROWSER:$BROWSER \
+            --variable HEADLESS:true \
+            $TEST_PATH
+        else
+          $DOCKER_CMD robot --outputdir /app/results \
+            --variable TEST_ENV:$ENVIRONMENT \
+            --variable BROWSER:$BROWSER \
+            --variable HEADLESS:true \
+            $TEST_PATH
+        fi
+    
+    - name: Upload Test Results
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: robot-results-${{ matrix.environment }}-${{ github.run_number }}
+        path: |
+          results/
+          !results/**/*.png
+        retention-days: 30
+    
+    - name: Upload Screenshots
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: robot-screenshots-${{ matrix.environment }}-${{ github.run_number }}
+        path: results/**/*.png
+        retention-days: 7
+    
+    - name: Parse Test Results
+      if: always()
+      run: |
+        if [ -f "results/output.xml" ]; then
+          # Extract test statistics
+          python3 << 'EOF'
+          import xml.etree.ElementTree as ET
+          import os
+          
+          try:
+              tree = ET.parse('results/output.xml')
+              root = tree.getroot()
+              
+              # Get statistics
+              total = root.find('.//statistics/total/stat').get('pass', '0')
+              failed = root.find('.//statistics/total/stat').get('fail', '0')
+              
+              # Create summary
+              summary = f"""
+              ## Test Results Summary - Environment ${{ matrix.environment }}
+              
+              - ✅ **Passed:** {total}
+              - ❌ **Failed:** {failed}
+              - 🌐 **Environment:** ${{ matrix.environment }}
+              - 📅 **Run Date:** $(date)
+              - 🔗 **Workflow:** ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+              """
+              
+              with open(os.environ['GITHUB_STEP_SUMMARY'], 'w') as f:
+                  f.write(summary)
+                  
+              # Set output for notification
+              with open(os.environ['GITHUB_OUTPUT'], 'a') as f:
+                  f.write(f"test_status={'success' if int(failed) == 0 else 'failure'}\n")
+                  f.write(f"passed_tests={total}\n")
+                  f.write(f"failed_tests={failed}\n")
+                  
+          except Exception as e:
+              print(f"Error parsing results: {e}")
+              with open(os.environ['GITHUB_OUTPUT'], 'a') as f:
+                  f.write("test_status=error\n")
+          EOF
+        fi
+      id: test_results
+    
+    - name: Comment on PR (if applicable)
+      if: github.event_name == 'pull_request' && always()
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const fs = require('fs');
+          if (fs.existsSync('results/report.html')) {
+            const comment = `
+            ## 🤖 Robot Framework Test Results
+            
+            **Environment:** ${{ matrix.environment }}
+            **Status:** ${{ steps.test_results.outputs.test_status }}
+            **Passed:** ${{ steps.test_results.outputs.passed_tests }}
+            **Failed:** ${{ steps.test_results.outputs.failed_tests }}
+            
+            📊 [View Full Report](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})
+            `;
+            
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comment
+            });
+          }
+
+  notify:
+    needs: robot-tests
+    runs-on: ubuntu-latest
+    if: always()
+    
+    steps:
+    - name: Notify Teams/Slack (Optional)
+      if: failure()
+      run: |
+        echo "Test execution failed. Add your notification logic here."
+        # You can add Teams/Slack webhook notifications here
