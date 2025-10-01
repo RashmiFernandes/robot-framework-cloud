@@ -1,0 +1,27 @@
+{
+    "environment": "C",
+    "description": "Environment C Configuration",
+    "OGF_URL": "https://environment-c.yourdomain.com/ogfield",
+    "OGW_URL": "https://environment-c.yourdomain.com/ogworkforce", 
+    "HTML_URL": "https://environment-c.yourdomain.com/html",
+    "OGSCOUT_URL": "https://environment-c.yourdomain.com/ogscout",
+    "DB_CONFIG": {
+        "host": "env-c-db.yourdomain.com",
+        "port": 1433,
+        "database": "OGSystem_C",
+        "username": "test_user",
+        "password": "test_password"
+    },
+    "USERS": {
+        "OGF_USER": "testuser_c",
+        "OGW_USER": "TRAIN01_C",
+        "HTML_USER": "htmluser_c",
+        "OGSCOUT_USER": "scoutuser_c"
+    },
+    "TEST_DATA": {
+        "Agency1": "EPB_C",
+        "JOBTYPE1": "AUTO_JOB01_C",
+        "JOBTYPE2": "9100_C",
+        "JOBTYPE3": "A200_C"
+    }
+}

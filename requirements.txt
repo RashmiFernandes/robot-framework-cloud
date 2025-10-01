@@ -1,0 +1,32 @@
+# Robot Framework and core libraries
+robotframework==6.1.1
+robotframework-seleniumlibrary==6.2.0
+robotframework-jsonlibrary==0.5
+robotframework-databaselibrary==2.0.1
+robotframework-requests==0.9.7
+robotframework-pabot==2.16.0
+
+# RPA Framework
+rpa-framework==27.7.0
+
+# Database drivers
+pymysql==1.1.0
+psycopg2-binary==2.9.7
+
+# Web drivers
+selenium==4.15.0
+webdriver-manager==4.0.1
+chromedriver-autoinstaller==0.6.2
+
+# Data processing
+openpyxl==3.1.2
+pandas==2.1.3
+requests==2.31.0
+
+# Cloud storage (for future use)
+boto3==1.34.0
+azure-storage-blob==12.19.0
+
+# Additional utilities
+python-dotenv==1.0.0
+jinja2==3.1.2

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <SOAP-ENV:Header></SOAP-ENV:Header>
+  <SOAP-ENV:Body>
+    <CreateJob xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" environment="Test" xmlns="http://www.utilitysolutions.cgi.com/MWFMS-1_2">
+      <ApplicationArea xmlns="http://www.openapplications.org/oagis">
+        <Sender>
+          <Component>Test</Component>
+          <AuthorizationId>Test</AuthorizationId>
+        </Sender>
+        <CreationDateTime>2020-02-28T12:05:21Z</CreationDateTime>
+      </ApplicationArea>
+      <DataArea>
+        <Job>
+          <AgencyCode>EPB</AgencyCode>          
+          <Filters />
+          <JobComments />
+          <LevelCode5>SYSTEM</LevelCode5>
+          <Location>
+            <Address>
+              <CityCode>1</CityCode>
+              <Streets>
+                <Street index="1">
+                  <Name>AUTOMATION</Name>
+                </Street>
+              </Streets>              
+            </Address>
+            <CrossStreets />
+            <Customer>
+              <Name>AUTOMATION</Name>
+            </Customer>            
+          </Location>
+          <Locks />                        
+          <WorkCode>A200</WorkCode>          
+        </Job>
+      </DataArea>
+    </CreateJob>
+  </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>

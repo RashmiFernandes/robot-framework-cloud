@@ -1,0 +1,60 @@
+{
+    "environment": "A",
+    "env_name": "sprints-PREDEV",
+    "description": "Environment A - sprints-PREDEV Configuration",
+    "OGF_URL": "https://rdm19dva31-ogfield.cgi-utilities.com/OGField",
+    "OGW_URL": "https://rdm19dva31-ogdispatch.cgi-utilities.com/OGDispatch", 
+    "HTML_URL": "http://rdm19dva31.integration.ssp/CGI.PragmaHtmlEditor",
+    "OGSCOUT_URL": "http://rdm19dva32.integration.ssp:8086/OGScout",
+    "APPCONFIG_URL": "http://rdm19dva31.integration.ssp/PSmart.Maintenance",
+    "INCIDENT_MGR_URL": "http://rdm19dva32.integration.ssp:8083",
+    "BASE_URL": "http://rdm19dva31.integration.ssp/Cgi.Ssp.Web.Site/",
+    "ENV_SERVER": "http://rdm19dva31.integration.ssp",
+    "DB_CONFIG": {
+        "host": "DB16S02.integration.ssp",
+        "port": 1523,
+        "database": "RDMPRDEV",
+        "connection_string": "usercad/usercad@DB16S02.integration.ssp:1523/RDMPRDEV",
+        "username": "usercad",
+        "password": "usercad"
+    },
+    "USERS": {
+        "OGF_USER": "TRAIN01",
+        "OGW_USER": "TRAIN01",
+        "HTML_USER": "TRAIN01",
+        "OGSCOUT_USER": "TRAIN01",
+        "INCIDENT_MGR_USER": "TRAIN05",
+        "APPCONFIG_USER": "TRAIN01"
+    },
+    "PASSWORDS": {
+        "OGF_PWD": "test",
+        "OGW_PWD": "test",
+        "HTML_PWD": "test",
+        "OGSCOUT_PWD": "test",
+        "INCIDENT_MGR_PWD": "test",
+        "APPCONFIG_PWD": "test"
+    },
+    "TEST_DATA": {
+        "Agency1": "EPB",
+        "JOBTYPE1": "AUTO_JOB01",
+        "JOBTYPE2": "9100",
+        "JOBTYPE3": "A200",
+        "WebBrowser": "chrome",
+        "TEST_ENV": "sprints-PREDEV",
+        "FieldReport": "1^Testing",
+        "SetReason_Remarks": "TEST_REMARKS",
+        "CreateJob_JobDetails1": "TaskType:0,Jobtype:AUTO_JOB01,Address:205 ISLAND AVE,City:2"
+    },
+    "ALIASES": {
+        "OGF_Alias": "OGF",
+        "OGW_Alias": "OGW",
+        "HTML_Alias": "HTML",
+        "OGSCOUT_Alias": "PSCOUT",
+        "INCIDENT_MGR_Alias": "PWEBD",
+        "APPCONFIG_Alias": "APPCONFIG"
+    },
+    "HTML_APPS": {
+        "HTML_OGF": "PragmaFIELD",
+        "HTML_OGW": "WebDispatch"
+    }
+}

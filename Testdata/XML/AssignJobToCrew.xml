@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"> 
+<soap:Body> 
+<CreateAssignment xmlns:tns="http://www.utilitysolutions.cgi.com/MWFMS-1_2" environment="Test" xmlns="http://www.utilitysolutions.cgi.com/MWFMS-1_2"> 
+	<ApplicationArea xmlns="http://www.openapplications.org/oagis"> 
+	<Sender> 
+		<Component>Test</Component> 
+		<AuthorizationId>WebClient</AuthorizationId> 
+	</Sender> 
+	<BODId>26E8D2BC-82D4-41A5-B072-61821B0A7789</BODId> 
+	</ApplicationArea> 
+	 <DataArea> 
+ 	 <Assignment> 
+		<AgencyCode>EPB</AgencyCode>
+		<CrewCode>BAILEY_GR</CrewCode>
+		<JobNumber>EPB-20250324-00012</JobNumber>
+		<ShiftCode>7A-530P</ShiftCode>
+		<ShiftDate>2025-03-24</ShiftDate>
+ 	 </Assignment> 
+	 </DataArea> 
+</CreateAssignment> 
+</soap:Body></soap:Envelope>

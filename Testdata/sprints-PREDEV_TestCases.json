@@ -1,0 +1,104 @@
+{
+    "Status_DP_to_CL":{
+        "TESTCASENAME": "Status_DP_to_CL",        
+        "JOBTYPE": "9100",
+        "OGW_USER": "TRAIN10",
+        "OGWUSER_TESTDATA": "TRAIN02"
+        },
+        
+    "OGF_OGW_CreateJob": {
+        "TESTCASENAME": "OGF_OGW_CreateJob",
+        "JOBTYPE": "AUTO_JOB01",        
+        "OG_FS_User": "ALLISONJ", 
+        "OG_FS_Crew": "TS_ALLISON",
+        "OGWUSER_TESTDATA": "AUTO2",
+        "SysCADParameter": "ASSIGNNEWJOB", 
+        "OGField_User": "AUTO10",
+        "OGField_Crew": "AUTCREW10",  
+        "OGField_PWD": "test"
+    },
+
+    "SanityTest":{
+        "OGField_User": "AUTO10",
+        "OGField_Crew": "AUTCREW10",   
+        "OGField_PWD": "test",     
+        "OG_FS_User": "ALLISONJ", 
+        "OG_FS_Crew": "TS_ALLISON",
+        "OGWUSER_TESTDATA": "AUTO2",
+        "SysCADParameter": "ASSIGNNEWJOB",
+        "JOBTYPE": "AUTO_JOB01",     
+        "JobJarQuery1": "JobJar",
+        "JobJarQuery2": "TestEF"
+    },
+
+    
+    "CrewMakeup":{
+        "OGField_User": "MANISH02",
+        "OGField_Crew": "MANISH02",        
+        "OGWUSER_TESTDATA": "TRAIN02"
+    },
+
+    "Calendar_GDM":{
+        "OGWUSER_TESTDATA": "TRAIN01",
+        "GDM_Main_Query": "NONE",
+        "GDM_Sub_Query": "ALL CREWS GDM",
+        "GDM_CREW1": "AUTCREW1",
+        "GDM_CREW2": "AUTCREW10"
+
+    },
+    
+    "OGF_OGW_Attachment":{
+        "JOBTYPE": "AUTO_JOB01",
+        "OGWUSER_TESTDATA": "TRAIN10",        
+        "OGField_User": "AUTO14",
+        "OGField_Crew": "AUTCREW14",  
+        "OGField_PWD": "test", 
+        "OG_FS_User": "FLV1",
+        "OG_FS_Crew": "FLV1"
+    },
+    
+
+    "JobJar":{
+        "OGField_User": "AUTO1",
+        "OGField_Crew": "AUTCREW1",
+        "OGField_PWD": "test",
+        "JobJarQuery1": "JobJar",
+        "JobJarQuery2": "TestEF"
+    },
+
+    "IncMgr_CreateCall":{
+        "IncidentQuery": "TODAY/TRAIN05",
+        "CustomerName": "AUT",
+        "IncidentPhone": "4234017056",
+        "IncidentServiceAddress": "5204SAWYER",
+        "IncidentCity": "CHATTANOOGA",
+        "IncidentStructure": "A6043",
+        "IncidentDistrict": "DISTRICT",
+        "IncidentRemarks": "TEST_REMARKS",
+        "IncidentDestination": "TEST_DIRECT",
+        "IncidentCallType": "LGT",
+        "IncidentProblemCode": "LP02",
+        "IncidentStatus": "Completed"
+    },
+
+    "OGW_VerifyPages":{
+        "OGWUSER_TESTDATA": "TRAIN10"     
+    },
+    
+    "Generic_Data": {        
+        "OGW_JobList_Query_SEARCHJOB": "AUTOMATION^AUTOMATION_SEARCH_BY_JOB",        
+        "OGW_JobList_Query_RC_JOBS": "AUTOMATION^AUTOMATION_RC_DESCENDING",
+        "OGW_CrewList_Query_SEARCHCREW": "AUTOMATION^1CREW?",
+        "OGW_CrewList_Query_1CREW?": "AUTOMATION^1CREW?",
+        "OGW_AssignmentList_Query_BYJOB": "AUTOMATION^BY_JOB_NO",
+        "OGW_AssignmentList_Query_BYCREW": "AUTOMATION^#CREW?",
+        "FS_JobList_Query_ALL_JOBS_TODAY": "AUTOMATION^FS JOBS TODAY",
+        "FS_CrewList_Query_SEARCHCREW": "AUTOMATION^FS_BY CREW ?",
+        "FS_AssignmentList_Query_Query_BYJOB": "General^FS_BY CREW ?",
+        "FS_JobList_Query_SEARCHJOB": "NONE^FS AUTOMATION JOB",
+        "OGF_Joblist_Qrydropdown1": "AUTOMATION",
+        "OGF_Joblist_Qrydropdown2": "MY JOBS",
+        "OGW_GDM_Panel": "Panel 50:  GDM"
+    }
+}
+

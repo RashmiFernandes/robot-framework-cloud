@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<oms:CreateCall xmlns:oms="http://www.utilitysolutions.cgi.com/OMS-1_2" xmlns:oa="http://www.openapplications.org/oagis" revision="1.2.0" environment="Test">
+  <oa:ApplicationArea>
+    <oa:Sender>
+      <oa:Component>Identify the application of origin</oa:Component>
+      <oa:AuthorizationId>Identify the user of origin</oa:AuthorizationId>
+    </oa:Sender>
+    <oa:CreationDateTime>2006-09-12T15:55:00-05:00</oa:CreationDateTime>
+    <oa:BODId>GUID - Globally Unique Identifier</oa:BODId>
+  </oa:ApplicationArea>
+  <oms:DataArea>
+    <oa:Create />
+    <oms:Call>
+      <oms:ExternalNumbers>
+        <oms:ExternalNumber index="1"></oms:ExternalNumber>
+      </oms:ExternalNumbers>
+      <oms:Customer>
+        <oms:CustomerId>227018</oms:CustomerId>
+        <oms:CallbackType></oms:CallbackType>
+        <oms:District>SH</oms:District>
+      </oms:Customer>
+      <oms:Contact>
+        <oms:Name>RASHMI</oms:Name>
+        <oms:Phones>
+          <oms:Phone index="1">
+            <oms:Number>1234567890</oms:Number>
+            <oms:Extension></oms:Extension>
+          </oms:Phone>
+        </oms:Phones>
+      </oms:Contact>
+      <oms:Address>             
+		<oms:FreeFormat>Test PWEB</oms:FreeFormat>
+      </oms:Address>
+      <oms:Directions></oms:Directions>
+      <oms:TimeLine>
+        <oms:CreationDateTime></oms:CreationDateTime>
+      </oms:TimeLine>
+      <oms:Clues>
+        <oms:Clue index="1">
+          <oms:Code>P100</oms:Code>
+          <oms:Description></oms:Description>
+        </oms:Clue>
+      </oms:Clues>
+      <oms:Comment></oms:Comment>
+      <oms:CallTaker></oms:CallTaker>
+      <oms:BreakerChecked></oms:BreakerChecked>
+      <oms:StructureNumber></oms:StructureNumber>
+      <oms:UDFS>
+        <oms:UDF index="5"></oms:UDF>
+      </oms:UDFS>
+      <oms:Meter>
+        <oms:Location></oms:Location>
+      </oms:Meter>
+    </oms:Call>
+  </oms:DataArea>
+</oms:CreateCall>

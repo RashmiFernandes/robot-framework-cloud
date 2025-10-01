@@ -1,0 +1,27 @@
+{
+    "environment": "B",
+    "description": "Environment B Configuration",
+    "OGF_URL": "https://environment-b.yourdomain.com/ogfield",
+    "OGW_URL": "https://environment-b.yourdomain.com/ogworkforce", 
+    "HTML_URL": "https://environment-b.yourdomain.com/html",
+    "OGSCOUT_URL": "https://environment-b.yourdomain.com/ogscout",
+    "DB_CONFIG": {
+        "host": "env-b-db.yourdomain.com",
+        "port": 1433,
+        "database": "OGSystem_B",
+        "username": "test_user",
+        "password": "test_password"
+    },
+    "USERS": {
+        "OGF_USER": "testuser_b",
+        "OGW_USER": "TRAIN01_B",
+        "HTML_USER": "htmluser_b",
+        "OGSCOUT_USER": "scoutuser_b"
+    },
+    "TEST_DATA": {
+        "Agency1": "EPB_B",
+        "JOBTYPE1": "AUTO_JOB01_B",
+        "JOBTYPE2": "9100_B",
+        "JOBTYPE3": "A200_B"
+    }
+}
